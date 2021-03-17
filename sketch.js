@@ -5,6 +5,7 @@ var playerCount;
 var allPlayers;
 var distance = 0;
 var database;
+var win=0;
 
 var form, player, game;
 

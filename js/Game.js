@@ -44,6 +44,7 @@ class Game {
     form.hide();
     
     Player.getPlayerInfo();
+    player.getCarAtEnd();
     
     if(allPlayers !== undefined){
       background(rgb(198,135,103));
@@ -91,14 +92,33 @@ class Game {
       player.update();
     }
 
-    if(player.distance > 3860){
+    if(player.distance > 3600){
       gameState = 2;
+      player.rank+=1;
+      
+      textSize(30);
+      stroke("blue");
+      strokeWeight(5);
+      fill(0);
+        
+      if(player.rank===1){
+        text(player.name+" is the Winner ",camera.position.x,camera.position.y+100);
+        win=1;
+      }
     }
-   
+
+    if(player.rank!==1 && player.distance<3600){
+      text(player.name+" is "+player.rank,camera.position.x,camera.position.y+100);
+      text(player.name+" is the Winner ",camera.position.x,camera.position.y+150);
+    }
+
     drawSprites();
   }
 
   end(){
     console.log("Game Ended");
+    Player.updateCarAtEnd(player.rank);
+    console.log(player.rank);
+    
   }
 }
